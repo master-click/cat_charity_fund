@@ -32,20 +32,20 @@ python -m venv venv
 source venv/scripts/activate
 ```
 
-## 3) Установить зависимости
+### 3) Установить зависимости
 ```
-python3 -m pip install --upgrade pip
+python -m pip install --upgrade pip
 ```
 ```
 python pip install -r requirements.txt
 ```
 
-## 4) Создать базу данных
+### 4) Создать базу данных
 ```
 alembic upgrade head
 ```
 
-## 5) Запустить проект
+### 5) Запустить проект
 ```
 uvicorn app.main:app --reload
 ```
@@ -54,6 +54,123 @@ uvicorn app.main:app --reload
 
 Документация и выполнение запросов к API: http://127.0.0.1:8000/docs
 
+
+## Примеры запросов
+1. GET-запрос на получение всех проектов http://127.0.0.1:8000/charity_project/
+
+```
+# Ответ:
+[
+  {
+    "name": "Важный проект",
+    "description": "string",
+    "full_amount": 5000,
+    "id": 1,
+    "invested_amount": 5000,
+    "fully_invested": true,
+    "create_date": "2023-04-10T15:57:24.584112",
+    "close_date": "2023-04-11T18:02:54.849585"
+  },
+  {
+    "name": "Интересный проект",
+    "description": "string",
+    "full_amount": 5000,
+    "id": 2,
+    "invested_amount": 5000,
+    "fully_invested": true,
+    "create_date": "2023-04-11T17:18:13.961236",
+    "close_date": "2023-04-11T18:03:53.122154"
+  },
+  {
+    "name": "Крутой проект",
+    "description": "2 лимона",
+    "full_amount": 2000000,
+    "id": 3,
+    "invested_amount": 1239000,
+    "fully_invested": false,
+    "create_date": "2023-04-11T17:26:47.486937"
+  }
+]
+```
+
+2. POST-запрос на добавление проекта: http://127.0.0.1:8000/charity_project/
+
+```
+# Запрос:
+{
+  "name": "Строительство приюта",
+  "description": "Приют для бездомных кошек площадью 100 кв.м.",
+  "full_amount": 3000000
+}
+
+# Ответ:
+{
+  "name": "Строительство приюта",
+  "description": "Приют для бездомных кошек площадью 100 кв.м.",
+  "full_amount": 3000000,
+  "id": 8,
+  "invested_amount": 0,
+  "fully_invested": false,
+  "create_date": "2023-04-13T10:00:01.232031"
+}
+```
+
+3. GET-запрос на получение всех пожертвований http://127.0.0.1:8000/donation/
+
+```
+# Ответ:
+[
+  {
+    "full_amount": 1000000,
+    "comment": "миллион вам в руки",
+    "id": 1,
+    "create_date": "2023-04-11T17:25:47.369809",
+    "user_id": 1,
+    "invested_amount": 1000000,
+    "fully_invested": true,
+    "close_date": "2023-04-11T18:03:53.122154"
+  },
+  {
+    "full_amount": 1000,
+    "comment": "на доброе дело от Васи",
+    "id": 2,
+    "create_date": "2023-04-13T10:04:31.661262",
+    "user_id": 1,
+    "invested_amount": 1000,
+    "fully_invested": true,
+    "close_date": "2023-04-13T10:04:31.792795"
+  }
+]
+```
+
+4. POST-запрос на добавление пожертвования: http://127.0.0.1:8000/donation/
+```
+# Запрос:
+{
+  "full_amount": 1000,
+  "comment": "на доброе дело от Васи"
+}
+
+# Ответ:
+{
+  "full_amount": 1000,
+  "comment": "на доброе дело от Васи",
+  "id": 8,
+  "create_date": "2023-04-13T10:04:31.661262"
+}
+```
+
+5. GET-запрос на получение информации о пользователе: http://127.0.0.1:8000/users/3
+```
+# Ответ:
+{
+  "id": 3,
+  "email": "masha@masha.ru",
+  "is_active": true,
+  "is_superuser": false,
+  "is_verified": false
+}
+```
 
 ## Разработчик
 Батова Ольга, @olgabato
