@@ -173,5 +173,4 @@ uvicorn app.main:app --reload
 ```
 
 ## Разработчик
-Батова Ольга, @olgabato
-Студент Яндекс.Практикума
+Батова Ольга, [@olgabato](https://t.me/olgabato)
